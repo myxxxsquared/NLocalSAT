@@ -1,0 +1,7 @@
+/yalsat
+/palsat
+/*.a
+/*.o
+/makefile
+/config.h
+/cflags.h

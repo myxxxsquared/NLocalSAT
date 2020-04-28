@@ -1,0 +1,96 @@
+Riss tool collection. Norbert Manthey. 2014
+
+You can receive the latest copy of the Riss and Coprocessor tool collection from
+http://tools.computational-logic.org
+Please send bug reports to norbert.manthey@tu-dresden.de
+
+================================================================================
+
+This software package contains the SAT solver Riss, and might contain related 
+tools:
+
+Coprocessor   ... a CNF simplifier
+Qprocessor    ... a QCNF simplifier
+Mprocessor    ... a MaxSAT simplifier
+ShiftBMC      ... a BMC solver
+Priss         ... a simple portfolio SAT solver
+Pcasso        ... a parallel search space splitting SAT solver
+Classifier    ... a CNF feature extraction tool
+
+This README file is split into two parts. The first part explains how to build the
+tools that are contained in the package, and the second part explains common use 
+cases.
+
+
+=== BUILDING: ==================================================================
+
+Usually, when a tool has been build and another tool should be build as well, then
+the next build call can be executed. However, some tool require additional build 
+flags, so that an intermediate "make clean" should be executed. This holds especially
+when building Pcasso. The build target for most performance is given below. For 
+debugging purposes, the suffix "RS" can be replaced with "d" to enable assertions
+and to disable code optimizations. 
+
+	To build Riss (by default without constructing DRAT-proofs):
+	make rissRS
+
+	With producing DRAT proofs:
+	make rissRS ARGS="-DDRATPROOF"
+
+	To build Coprocessor:
+	make coprocessorRS
+
+	To build Qprocessor:
+	make qprocessorRS
+
+	To build Mprocessor:
+	make mprocessorRS
+
+	To build Priss:
+	make prissRS
+
+	To build Pcasso:
+	make pcassoRS
+
+	To build Classifier:
+	make cls
+
+To build ShiftBMC, the script "./configure" has to be run successfully in the 
+directory "shiftbmc-src" before the solver can be build.
+
+	To build ShiftBMC (by default without ABC library):
+	make shiftbmcs
+
+	To build ShiftBMC with ABC library:
+	make shiftbmc-abcs
+
+=== COMMON USE CASES: ==========================================================
+
+The available parameters can be listed for each tool by calling:
+	./<tool> --help
+
+Using Riss to solve a formula <input.cnf> use
+	./riss <input.cnf> [solution] [solverOptions]
+
+Using Riss to solve a formula <input.cnf> and generating a DRUP proof, the 
+following call can be used. Depending on the proof verification tool the option
+"-no-proofFormat" should be specified. Note, not all formula simplification 
+techniques support generating a DRUP proof.
+	./riss <input.cnf> -drup=input.proof -no-proofFormat [solution] [solverOptions]
+
+The script "cp.sh" provides a simple setup for using Coprocessor as a formula 
+simplification tool and afterwards running a SAT solver. The used SAT solver can
+be exchanged by changing the variable "satsolver" in the head of the script.
+	./cp.sh <input.cnf> [coprocessorOptions]
+	
+The script "qp.sh" provides a simple setup for using Qprocessor as a QBF formula 
+simplification tool and afterwards running a QBF solver. The used QBF solver can
+be exchanged by changing the variable "qbfsolver" in the head of the script. The 
+simplification techniques setup of the QBF simplifier is limited at the moment 
+and no further simplifications should be enabled.
+	./qp.sh <input.qcnf> [qbfsolverOptions]
+	
+The CNF feature extraction tool classifier can be used to extract features from
+a CNF file by calling the tool as follows. Features can be disabled separately.
+For more information use the "--help" parameter.
+	./classifier <input.cnf>

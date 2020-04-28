@@ -1,0 +1,19 @@
+
+
+// limits on the size of the problem.
+#define MAX_VARS 4000010
+#define MAX_CLAUSES 20000000
+
+#cmakedefine USE_PREDICT
+
+#ifdef USE_PREDICT
+    #define USE_INIT_PREDICT
+    // #define USE_CHANGED_WEIGHT
+#endif /* USE_PREDICT */
+
+#define USE_NR
+// #define USE_RESULT
+
+#if defined USE_INIT_PREDICT && defined USE_RESULT
+#error USE_INIT_PREDICT and USE_RESULT cannot be used in the same time
+#endif
