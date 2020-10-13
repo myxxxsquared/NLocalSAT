@@ -43,7 +43,6 @@ def filter_same(prob_iter):
 
 def split_work_maker(split_size):
     def split_work(problem):
-        return [problem]
         return problem.split(split_size)
 
     return split_work
