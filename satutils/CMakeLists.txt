@@ -5,7 +5,7 @@ project(satutils)
 set (CMAKE_CXX_STANDARD 11)
 
 find_package(PythonInterp 3 REQUIRED)
-find_package(Python3 REQUIRED Development NumPy)
+find_package(Python REQUIRED Development NumPy)
 find_package(PythonLibs 3 REQUIRED)
 find_package(Boost REQUIRED COMPONENTS python${PYTHON_MAJOR_VERSION}${PYTHON_MINOR_VERSION} numpy${PYTHON_MAJOR_VERSION}${PYTHON_MINOR_VERSION})
 
