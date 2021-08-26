@@ -4,8 +4,10 @@ project(CCAnrWithPredict)
 
 set (CMAKE_CXX_STANDARD 11)
 
-find_package(Python3 REQUIRED COMPONENTS Development NumPy)
-find_package(Boost REQUIRED COMPONENTS program_options)
+find_package(PythonInterp 3 REQUIRED)
+find_package(Python REQUIRED Development NumPy)
+find_package(PythonLibs 3 REQUIRED)
+find_package(Boost REQUIRED COMPONENTS python${PYTHON_MAJOR_VERSION}${PYTHON_MINOR_VERSION} numpy${PYTHON_MAJOR_VERSION}${PYTHON_MINOR_VERSION} program_options)
 
 option(USE_PREDICT "use predict in solver" ON)
 configure_file(sat_defines.hpp.in sat_defines.hpp)
@@ -32,6 +34,6 @@ add_executable(CCAnrWithPredict
     ${CCAnrWithPredict_SRC})
 
 target_link_libraries(CCAnrWithPredict
-    Python3::Python
-    Python3::NumPy
+    Python::Python
+    Python::NumPy
     Boost::program_options)
