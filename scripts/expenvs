@@ -1,0 +1,11 @@
+
+echo "Please download SAT Competition data and place it to RANDOM_TRAIN and RANDOM_EVAL folders."
+echo "After that, comment the next line and run this script again."
+return 1
+
+
+RANDOM_TRAIN=SAT-PROBLEMS/random-train
+RANDOM_EVAL=SAT-PROBLEMS/random-eval
+
+DATA_FOLDER=satrandomdata
+
